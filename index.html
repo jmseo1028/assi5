@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>5번째 과제</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      overflow: hidden; 
+    }
+    .element {
+      width: 10px;
+      height: 10px;
+      position: absolute;
+      background-color: blueviolet;
+      border: 1px solid yellow;
+      font-size: 8px;
+      text-align: center;
+      color: violet;
+      transition: background-color 0.3s, transform 0.2s;
+    }
+  </style>
+</head>
+<body>
+  <script>
+    const colors = ['rgb(255,0,0)', 'rgb(255,255,0)', 'rgb(0,255,0)', 'rgb(0,0,255)'];
+    let texts = "";
+    let i = 0;
+
+   
+    const screenWidth = window.innerWidth;
+    const screenHeight = window.innerHeight;
+    const size = 12; 
+    const cols = Math.floor(screenWidth / size);
+    const rows = Math.floor(screenHeight / size);
+
+    for (let y = 0; y < rows; y++) {
+      for (let x = 0; x < cols; x++) {
+        let posx = x * size;
+        let posy = y * size;
+        texts += `<div class='element' style='left:${posx}px; top:${posy}px;'>${i}</div>`;
+        i++;
+      }
+    }
+
+    document.write(texts);
+
+    window.onload = function() {
+      const elements = document.getElementsByClassName('element');
+      Array.from(elements).forEach((element) => {
+        element.addEventListener('mouseover', function () {
+          element.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+          element.style.transform = 'translate(3px, 3px)';
+        });
+        element.addEventListener('mouseout', function () {
+          element.style.backgroundColor = 'blueviolet';
+          element.style.transform = 'translate(0, 0)';
+        });
+      });
+    };
+  </script>
+</body>
+</html>
